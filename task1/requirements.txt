@@ -1,0 +1,8 @@
+# 核心图像处理库 (包含GUI功能，支持 cv2.imshow)
+opencv-python>=4.6.0
+
+# 矩阵和数组计算库 (OpenCV 的底层数据结构基于 Numpy)
+numpy>=1.21.0
+
+# 绘图库 (用于绘制直方图)
+matplotlib>=3.5.0
