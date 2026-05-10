@@ -3,14 +3,19 @@ import numpy as np
 
 def add_gaussian_noise(image, mean=0, var=0.01):
     """添加高斯噪声,生成一个服从正态分布的随机矩阵，并将其叠加到原图上"""
+    # 归一化
     image = np.array(image/255, dtype=float)
+    # 生成正态分布矩阵
     noise = np.random.normal(mean, var ** 0.5, image.shape)
+    # 噪声叠加
     out = image + noise
+    # 裁剪，确保不超出有效范围
     if out.min() < 0:
         low_clip = -1.
     else:
         low_clip = 0.
     out = np.clip(out, low_clip, 1.0)
+    # 反归一化
     out = np.uint8(out*255)
     return out
 
@@ -19,8 +24,10 @@ def add_salt_and_pepper_noise(image, amount=0.05, salt_vs_pepper=0.5):
     row, col = image.shape[:2]
     out = np.copy(image)
     # 添加盐噪声 (Salt, 白色)
+    # 计算噪声数量
     num_salt = np.ceil(amount * image.size * salt_vs_pepper)
     coords = [np.random.randint(0, i - 1, int(num_salt)) for i in image.shape]
+    # 将选中像素设置为纯白色
     out[tuple(coords)] = 255
     # 添加椒噪声 (Pepper, 黑色)
     num_pepper = np.ceil(amount * image.size * (1. - salt_vs_pepper))

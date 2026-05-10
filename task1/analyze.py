@@ -7,6 +7,7 @@ def analyze_device_noise(image_path):
         print("未找到暗场图像，请检查路径。")
         return
 
+    # 计算像素强度的直方图
     hist = cv2.calcHist([img], [0], None, [256], [0, 256])
     
     plt.figure(figsize=(10, 5))
@@ -15,7 +16,7 @@ def analyze_device_noise(image_path):
     plt.ylabel("Frequency")
     plt.plot(hist, color='black')
     
-    # 你的图显示噪声主要集中在 0-50 之间，缩小X轴范围能看得更清楚
+    # 噪声主要集中在 0-50 之间，缩小X轴范围能看得更清楚
     plt.xlim([0, 50]) 
     plt.grid(alpha=0.3)
     
