@@ -43,8 +43,8 @@ def main():
         print("Error: JPEG compression failed.")
         sys.exit(1)
 
-    # Task 2: Channel decomposition on the most compressed image
-    channel_decomposition_visualize(saved_paths[-1])
+    # Task 2: Channel decomposition — original vs most compressed
+    channel_decomposition_visualize(args.image, saved_paths[-1])
 
     # Task 3: PSNR comparison
     if not args.no_psnr:
